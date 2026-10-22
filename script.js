@@ -59,9 +59,11 @@ async function sincronizarSessao(sessao) {
     var painelAcesso = document.getElementById("painelAcesso");
     var conteudoApp = document.getElementById("conteudoApp");
     var contaTopo = document.getElementById("contaTopo");
+    var seletorMes = document.getElementById("seletorMes");
     painelAcesso.hidden = Boolean(usuarioAtual);
     conteudoApp.hidden = !usuarioAtual;
     contaTopo.hidden = !usuarioAtual;
+    seletorMes.hidden = !usuarioAtual;
     if (usuarioAtual) {
         document.getElementById("emailUsuario").textContent = usuarioAtual.email;
         try {
