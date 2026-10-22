@@ -1,0 +1,21 @@
+{
+  "id": "./",
+  "name": "Finance+ | Seu dinheiro sob controle",
+  "short_name": "Finance+",
+  "description": "Acompanhe receitas, despesas e metas financeiras.",
+  "lang": "pt-BR",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "theme_color": "#11101c",
+  "background_color": "#0b0b12",
+  "icons": [
+    {
+      "src": "logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

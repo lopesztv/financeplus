@@ -1,0 +1,194 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#11101c">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Finance+ | Seu dinheiro sob controle</title>
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/svg+xml" href="logo.svg">
+    <link rel="apple-touch-icon" href="logo.svg">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <header class="topo">
+        <div class="marca">
+            <img class="marca-icone" src="logo.svg" alt="">
+            <div class="marca-texto">
+                <h1>Finance<span>+</span></h1>
+            <p>Seu dinheiro sob controle</p>
+            </div>
+        </div>
+        <div class="mes">
+            <label for="mesSelecionado">Mês:</label>
+            <input type="month" id="mesSelecionado">
+        </div>
+        <button type="button" id="instalarApp" class="botao-instalar">Instalar app</button>
+        <div class="conta" id="contaTopo" hidden>
+            <span id="emailUsuario"></span>
+            <button type="button" id="sairConta">Sair</button>
+        </div>
+    </header>
+
+    <div class="estado-conexao" id="estadoConexao" role="status" aria-live="polite" hidden></div>
+
+    <section class="acesso" id="painelAcesso">
+        <div class="bloco acesso-card">
+            <h2 id="tituloAcesso">Entre na sua conta</h2>
+            <p>Seus dados financeiros ficam associados à sua conta.</p>
+            <form id="formAcesso">
+                <label for="emailAcesso">E-mail</label>
+                <input id="emailAcesso" type="email" autocomplete="email" required>
+                <label for="senhaAcesso">Senha</label>
+                <input id="senhaAcesso" type="password" minlength="8" autocomplete="current-password" required>
+                <button type="submit" id="botaoAcesso">Entrar</button>
+            </form>
+            <button type="button" class="botao-texto" id="alternarAcesso">Criar uma conta</button>
+            <p class="mensagem-acesso" id="mensagemAcesso" role="status" aria-live="polite"></p>
+        </div>
+    </section>
+
+    <main class="container" id="conteudoApp" hidden>
+
+        <section class="boas-vindas">
+            <h2>Visão geral</h2>
+            <p>Acompanhe sua vida financeira em um só lugar.</p>
+        </section>
+
+        <section class="resumos">
+            <article class="cartao">
+                <p>Receitas do mês</p>
+                <h2 id="totalReceitas">R$ 0,00</h2>
+                <span>Dinheiro que entrou</span>
+            </article>
+
+            <article class="cartao">
+                <p>Despesas do mês</p>
+                <h2 id="totalDespesas">R$ 0,00</h2>
+                <span>Dinheiro que saiu</span>
+            </article>
+
+            <article class="cartao destaque">
+                <p>Saldo do mês</p>
+                <h2 id="saldoMes">R$ 0,00</h2>
+                <span>Receitas menos despesas</span>
+            </article>
+
+            <article class="cartao">
+                <p>Renda comprometida</p>
+                <h2 id="percentualGasto">0%</h2>
+                <span>Percentual da renda gasto</span>
+            </article>
+        </section>
+
+        <section class="alerta" id="alerta">
+            <h3>Sua situação financeira</h3>
+            <p id="mensagemAlerta">
+                Cadastre suas receitas e despesas para começar.
+            </p>
+        </section>
+
+        <section class="painel">
+            <div class="bloco">
+                <h2>Novo lançamento</h2>
+
+                <form id="formLancamento">
+                    <label for="descricao">Descrição</label>
+                    <input id="descricao" type="text"
+                        placeholder="Ex.: Salário, mercado..." required>
+
+                    <label for="valor">Valor (R$)</label>
+                    <input id="valor" type="number"
+                        min="0.01" step="0.01"
+                        placeholder="Ex.: 150,00" required>
+
+                    <label for="tipo">Tipo</label>
+                    <select id="tipo" required>
+                        <option value="despesa">Despesa</option>
+                        <option value="receita">Receita</option>
+                    </select>
+
+                    <label for="categoria">Categoria</label>
+                    <select id="categoria" required>
+                        <option value="Alimentação">Alimentação</option>
+                        <option value="Moradia">Moradia</option>
+                        <option value="Transporte">Transporte</option>
+                        <option value="Lazer">Lazer</option>
+                        <option value="Saúde">Saúde</option>
+                        <option value="Salário">Salário</option>
+                        <option value="Educação">Educação</option>
+                        <option value="Outros">Outros</option>
+                    </select>
+
+                    <label for="data">Data</label>
+                    <input id="data" type="date" required>
+
+                    <button type="submit">Adicionar lançamento</button>
+                </form>
+            </div>
+
+            <div class="bloco grafico">
+                <h2>Despesas por categoria</h2>
+                <label class="rotulo-grafico" for="tipoGrafico">Visualização</label>
+                <select id="tipoGrafico" class="seletor-grafico">
+                    <option value="doughnut">Rosca</option>
+                    <option value="pie">Pizza</option>
+                    <option value="bar">Barras</option>
+                </select>
+                <canvas id="graficoCategorias"></canvas>
+            </div>
+        </section>
+
+        <section class="bloco historico">
+            <h2>Histórico de lançamentos</h2>
+
+            <div class="tabela">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Descrição</th>
+                            <th>Categoria</th>
+                            <th>Data</th>
+                            <th>Tipo</th>
+                            <th>Valor</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody id="listaLancamentos">
+                        <tr>
+                            <td colspan="6">
+                                Nenhum lançamento neste mês.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="bloco metas">
+            <h2>Minha meta de economia</h2>
+            <p id="textoMeta">Defina uma meta para acompanhar seu progresso.</p>
+            <div class="linha-meta">
+                <input id="valorMeta" type="number" min="1"
+                    step="0.01" placeholder="Meta em R$">
+                <button id="salvarMeta" type="button">Salvar meta</button>
+            </div>
+            <progress id="progressoMeta" value="0" max="100"></progress>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Financeiro+ | Organize hoje, planeje amanhã.</p>
+    </footer>
+
+</body>
+</html>
