@@ -272,17 +272,6 @@ select {
     min-height: 44px;
 }
 
-.botao-instalar {
-    padding: 10px 14px;
-    background: #c4ff3b;
-    color: #171522;
-    white-space: nowrap;
-}
-
-.botao-instalar:hover {
-    background: #d5ff72;
-}
-
 .estado-conexao {
     padding: 12px 5%;
     text-align: center;
@@ -451,11 +440,6 @@ footer {
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-    }
-
-    .botao-instalar {
-        padding: 10px 12px;
-        font-size: 14px;
     }
 
     .marca h1 {

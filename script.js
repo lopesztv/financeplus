@@ -485,7 +485,6 @@ window.addEventListener("offline", atualizarEstadoConexao);
 atualizarEstadoConexao();
 
 window.addEventListener("beforeinstallprompt", function(evento) {
-    evento.preventDefault();
     promptInstalacao = evento;
     botaoInstalar.textContent = "Instalar Finance+";
 });
