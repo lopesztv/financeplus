@@ -1,4 +1,4 @@
-const CACHE_NAME = "finance-plus-shell-v1";
+const CACHE_NAME = "finance-plus-shell-v2";
 const BASE_PATH = new URL("./", self.location.href).pathname;
 const INDEX_URL = new URL("./index.html", self.location.href).href;
 const APP_FILES = [
@@ -8,7 +8,10 @@ const APP_FILES = [
     "./script.js",
     "./supabase-config.js",
     "./manifest.webmanifest",
-    "./logo.svg"
+    "./logo.svg",
+    "./icon-192.png",
+    "./icon-512.png",
+    "./apple-touch-icon.png"
 ].map(function(path) { return new URL(path, self.location.href).href; });
 
 self.addEventListener("install", function(event) {
