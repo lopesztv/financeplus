@@ -428,7 +428,7 @@ document.getElementById("alternarAcesso").addEventListener("click", function() {
 
 document.getElementById("formAcesso").addEventListener("submit", async function(evento) {
     evento.preventDefault();
-    if (!configurado) { mostrarMensagemAcesso("Configure a URL e a chave do Supabase em supabase-config.js e execute supabase-schema.sql no painel do projeto."); return; }
+    if (!configurado) { mostrarMensagemAcesso("Configure a URL e a chave do Supabase em js/supabase-config.js e execute supabase/schema.sql no painel do projeto."); return; }
     var email = document.getElementById("emailAcesso").value.trim();
     var senha = document.getElementById("senhaAcesso").value;
     var botao = document.getElementById("botaoAcesso");
@@ -461,7 +461,7 @@ document.getElementById("sairConta").addEventListener("click", async function() 
 });
 
 if (!configurado) {
-    mostrarMensagemAcesso("Para ativar o login, configure supabase-config.js e execute supabase-schema.sql no Supabase.");
+    mostrarMensagemAcesso("Para ativar o login, configure js/supabase-config.js e execute supabase/schema.sql no Supabase.");
 } else {
     supabase.auth.onAuthStateChange(function(_evento, sessao) {
         sincronizarSessao(sessao);
